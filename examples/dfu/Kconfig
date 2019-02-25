@@ -1,0 +1,31 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config EXAMPLES_DFU
+	tristate "DFU reboot example"
+	default n
+	depends on STM32_DFU
+	---help---
+		Reboots the target into DFU mode
+
+if EXAMPLES_DFU
+
+config EXAMPLES_DFU_PROGNAME
+	string "Program name"
+	default "dfu"
+	depends on BUILD_LOADABLE
+	---help---
+		This is the name of the program that will be use when the NSH ELF
+		program is installed.
+
+config EXAMPLES_DFU_PRIORITY
+	int "DFU task priority"
+	default 100
+
+config EXAMPLES_DFU_STACKSIZE
+	int "DFU task stack size"
+	default 2048
+
+endif
